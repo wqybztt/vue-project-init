@@ -4,13 +4,13 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 const maxFilesize = 2*1024;
-
+const vuxLoader = require('vux-loader')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-module.exports = {
+const webpackConfig =  {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js'
@@ -68,3 +68,7 @@ module.exports = {
     ]
   }
 }
+
+module.exports = vuxLoader.merge(webpackConfig,{
+  plugins:['vux-ui','inline-manifest']
+})
